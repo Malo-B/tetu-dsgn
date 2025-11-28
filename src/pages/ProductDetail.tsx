@@ -93,7 +93,7 @@ const ProductDetail = () => {
                     </Reveal>
 
                     <Reveal delay={0.3}>
-                        <Text style={{ marginBottom: '3rem', fontSize: '1.1rem' }}>
+                        <Text className="product-description">
                             {product.description}
                         </Text>
                     </Reveal>
@@ -105,7 +105,7 @@ const ProductDetail = () => {
                                     <Text style={{ marginBottom: '1rem', fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
                                         {t('product.selectColor')}
                                     </Text>
-                                    <div style={{ display: 'flex', gap: '1rem' }}>
+                                    <div className="color-selector">
                                         {product.variants.map(variant => (
                                             <Link
                                                 key={variant.slug}
@@ -130,17 +130,16 @@ const ProductDetail = () => {
                             <Text style={{ marginBottom: '1rem', fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
                                 {t('product.selectSize')}
                             </Text>
-                            <div style={{ display: 'flex', gap: '1rem', marginBottom: '2rem' }}>
+                            <div className="size-selector">
                                 {sizes.map(size => (
                                     <button
                                         key={size}
                                         onClick={() => setSelectedSize(size)}
+                                        className="size-button"
                                         style={{
-                                            padding: '1rem 1.5rem',
                                             background: selectedSize === size ? 'var(--color-accent)' : '#1a1a1a',
                                             color: selectedSize === size ? 'var(--color-bg)' : 'var(--color-text)',
                                             border: selectedSize === size ? 'none' : '1px solid #333',
-                                            fontSize: '1rem',
                                             fontWeight: selectedSize === size ? 700 : 400,
                                             transition: 'all 0.3s'
                                         }}
