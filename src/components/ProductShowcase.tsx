@@ -18,10 +18,8 @@ const ProductShowcase = () => {
                 <Heading style={{ marginBottom: '6rem' }}>Latest Drops</Heading>
             </Reveal>
 
-            <div style={{
+            <div className="product-grid" style={{
                 display: 'grid',
-                gridTemplateColumns: 'repeat(2, 1fr)',
-                gap: '4rem',
                 rowGap: '8rem'
             }}>
                 {products.map((product, index) => (

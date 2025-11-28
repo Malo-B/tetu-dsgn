@@ -11,9 +11,8 @@ export const Section = ({ children, className = "", id = "", style = {} }: Secti
     return (
         <section
             id={id}
-            className={className}
+            className={`section-padding ${className}`}
             style={{
-                padding: "8rem 4rem",
                 position: "relative",
                 width: "100%",
                 overflow: "hidden",

@@ -19,7 +19,7 @@ const Hero = () => {
                 transition={{ duration: 1, ease: [0.19, 1, 0.22, 1], delay: 0.2 }}
                 style={{ zIndex: 10, mixBlendMode: 'difference', color: 'white' }}
             >
-                <Heading level={1} style={{ textAlign: 'center' }}>
+                <Heading level={1} className="hero-heading" style={{ textAlign: 'center' }}>
                     TÊTU
                 </Heading>
             </motion.div>
@@ -41,13 +41,11 @@ const Hero = () => {
             </motion.p>
 
             {/* Background Elements */}
-            <div style={{
+            <div className="hero-bg" style={{
                 position: 'absolute',
                 top: '50%',
                 left: '50%',
                 transform: 'translate(-50%, -50%)',
-                width: '40vw',
-                height: '60vh',
                 background: 'url(https://images.unsplash.com/photo-1523396870179-16cca81bab0b?q=80&w=2000&auto=format&fit=crop) center/cover',
                 filter: 'grayscale(100%) contrast(120%)',
                 opacity: 0.4,

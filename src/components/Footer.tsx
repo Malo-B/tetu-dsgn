@@ -2,8 +2,7 @@
 
 const Footer = () => {
     return (
-        <footer style={{
-            padding: '4rem',
+        <footer className="footer" style={{
             textAlign: 'center',
             color: '#666',
             fontSize: '0.9rem',
