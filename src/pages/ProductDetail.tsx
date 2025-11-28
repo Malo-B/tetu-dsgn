@@ -41,7 +41,7 @@ const ProductDetail = () => {
                     initial={{ opacity: 0, x: -50 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.8 }}
-                    style={{ position: 'sticky', top: '12rem' }}
+                    className="product-image-container"
                 >
                     <img
                         src={productImages[currentImageIndex]}
@@ -81,13 +81,13 @@ const ProductDetail = () => {
 
                 <div>
                     <Reveal>
-                        <Heading level={2} style={{ marginBottom: '1rem', fontSize: '3rem' }}>
+                        <Heading level={2} className="product-title">
                             {product.name}
                         </Heading>
                     </Reveal>
 
                     <Reveal delay={0.2}>
-                        <Text style={{ fontSize: '2rem', color: 'var(--color-accent)', marginBottom: '2rem' }}>
+                        <Text className="product-price">
                             {product.price}
                         </Text>
                     </Reveal>
