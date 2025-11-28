@@ -28,8 +28,8 @@ const Navbar = () => {
         color: 'white'
       }}
     >
-      <Link to="/" style={{ fontSize: '1.5rem', fontWeight: 900, letterSpacing: '-0.05em' }}>
-        TÊTU
+      <Link to="/" style={{ display: 'flex', alignItems: 'center' }}>
+        <img src="/logo_tetu.svg" alt="TÊTU" style={{ height: '2.5rem', filter: 'invert(1)' }} />
       </Link>
       <div style={{ display: 'flex', gap: '2rem', fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '0.1em', alignItems: 'center' }}>
         <Link to="/">{t('nav.shop')}</Link>
