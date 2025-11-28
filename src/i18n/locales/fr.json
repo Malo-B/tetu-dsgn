@@ -1,0 +1,101 @@
+{
+    "nav": {
+        "shop": "Boutique",
+        "collections": "Collections",
+        "materials": "Matériaux",
+        "nft": "NFT",
+        "cart": "Panier"
+    },
+    "hero": {
+        "subtitle": "Têtu par nature"
+    },
+    "products": {
+        "title": "Dernières Sorties",
+        "coralHoodie": "Sweat Polaire Corail",
+        "slateHoodie": "Sweat Polaire Ardoise",
+        "camelHoodie": "Sweat Polaire Camel",
+        "charcoalHoodie": "Sweat Polaire Anthracite"
+    },
+    "product": {
+        "selectColor": "Sélectionner la Couleur",
+        "selectSize": "Sélectionner la Taille",
+        "quantity": "Quantité",
+        "addToCart": "Ajouter au Panier",
+        "addedToCart": "Ajouté au Panier"
+    },
+    "cart": {
+        "title": "Panier",
+        "empty": "Votre panier est vide",
+        "emptyMessage": "Ajoutez des articles pour commencer",
+        "continueShopping": "Continuer les Achats",
+        "size": "Taille",
+        "qty": "Qté",
+        "remove": "Retirer",
+        "orderSummary": "Récapitulatif",
+        "subtotal": "Sous-total",
+        "shipping": "Livraison",
+        "total": "Total",
+        "proceedToCheckout": "Passer la Commande"
+    },
+    "checkout": {
+        "title": "Paiement",
+        "shippingInfo": "Informations de Livraison",
+        "paymentInfo": "Informations de Paiement",
+        "orderSummary": "Récapitulatif",
+        "firstName": "Prénom",
+        "lastName": "Nom",
+        "email": "Email",
+        "phone": "Téléphone",
+        "address": "Adresse",
+        "city": "Ville",
+        "postalCode": "Code Postal",
+        "country": "Pays",
+        "creditCard": "Carte de Crédit",
+        "cardNumber": "Numéro de Carte",
+        "expiryDate": "Date d'Expiration",
+        "placeOrder": "Passer la Commande",
+        "success": "Commande Passée avec Succès!",
+        "successMessage": "Merci pour votre commande. Vous recevrez un email de confirmation sous peu.",
+        "orderNumber": "Numéro de Commande",
+        "backToShop": "Retour à la Boutique"
+    },
+    "materials": {
+        "teaser": {
+            "title": "Matériaux de Luxe Recyclés",
+            "description": "Chaque pièce est confectionnée à partir de tissus invendus provenant des maisons de mode de luxe les plus prestigieuses au monde.",
+            "cta": "En Savoir Plus"
+        },
+        "page": {
+            "title": "Nos Matériaux",
+            "intro": "Chaque pièce de la collection Têtu est confectionnée à partir de tissus invendus provenant des maisons de mode de luxe les plus prestigieuses au monde.",
+            "upcycled": {
+                "title": "Luxe Recyclé",
+                "description": "Nous sauvons des matériaux premium qui seraient autrement gaspillés. Chaque tissu raconte une histoire de savoir-faire d'ateliers renommés, donnant une nouvelle vie à nos créations contemporaines."
+            },
+            "sustainable": {
+                "title": "Avenir Durable",
+                "description": "En utilisant des stocks morts, nous réduisons les déchets et minimisons notre empreinte environnementale. Le luxe ne doit pas se faire au détriment de notre planète."
+            },
+            "vision": {
+                "title": "La Vision",
+                "description": "Têtu représente une nouvelle ère du streetwear—une ère qui honore l'artisanat patrimonial tout en repoussant les limites. Nous croyons en la création de pièces à la fois intemporelles et contemporaines, durables et luxueuses. Notre nom reflète notre engagement inébranlable envers la qualité, la durabilité et l'innovation."
+            }
+        }
+    },
+    "nft": {
+        "teaser": {
+            "title": "Jumeau Numérique NFT",
+            "description": "Chaque vêtement est accompagné d'un NFT unique—votre certificat d'authenticité et votre accès à des avantages exclusifs.",
+            "cta": "Découvrir les NFTs"
+        },
+        "page": {
+            "title": "Jumeau Numérique",
+            "intro": "Chaque vêtement Têtu est accompagné d'un NFT unique—votre certificat numérique d'authenticité et votre accès à des expériences exclusives.",
+            "howItWorks": "Comment Ça Marche",
+            "benefits": "Avantages Exclusifs"
+        }
+    },
+    "footer": {
+        "rights": "Tous Droits Réservés"
+    }
+}

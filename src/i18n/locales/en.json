@@ -1,0 +1,101 @@
+{
+    "nav": {
+        "shop": "Shop",
+        "collections": "Collections",
+        "materials": "Materials",
+        "nft": "NFT",
+        "cart": "Cart"
+    },
+    "hero": {
+        "subtitle": "Stubborn by design"
+    },
+    "products": {
+        "title": "Latest Drops",
+        "coralHoodie": "Coral Fleece Hoodie",
+        "slateHoodie": "Slate Fleece Hoodie",
+        "camelHoodie": "Camel Fleece Hoodie",
+        "charcoalHoodie": "Charcoal Fleece Hoodie"
+    },
+    "product": {
+        "selectColor": "Select Color",
+        "selectSize": "Select Size",
+        "quantity": "Quantity",
+        "addToCart": "Add to Cart",
+        "addedToCart": "Added to Cart"
+    },
+    "cart": {
+        "title": "Shopping Cart",
+        "empty": "Your cart is empty",
+        "emptyMessage": "Add some items to get started",
+        "continueShopping": "Continue Shopping",
+        "size": "Size",
+        "qty": "Qty",
+        "remove": "Remove",
+        "orderSummary": "Order Summary",
+        "subtotal": "Subtotal",
+        "shipping": "Shipping",
+        "total": "Total",
+        "proceedToCheckout": "Proceed to Checkout"
+    },
+    "checkout": {
+        "title": "Checkout",
+        "shippingInfo": "Shipping Information",
+        "paymentInfo": "Payment Information",
+        "orderSummary": "Order Summary",
+        "firstName": "First Name",
+        "lastName": "Last Name",
+        "email": "Email",
+        "phone": "Phone",
+        "address": "Address",
+        "city": "City",
+        "postalCode": "Postal Code",
+        "country": "Country",
+        "creditCard": "Credit Card",
+        "cardNumber": "Card Number",
+        "expiryDate": "Expiry Date",
+        "placeOrder": "Place Order",
+        "success": "Order Placed Successfully!",
+        "successMessage": "Thank you for your order. You will receive a confirmation email shortly.",
+        "orderNumber": "Order Number",
+        "backToShop": "Back to Shop"
+    },
+    "materials": {
+        "teaser": {
+            "title": "Upcycled Luxury Materials",
+            "description": "Every piece is crafted from deadstock fabrics sourced from the world's most prestigious luxury fashion houses.",
+            "cta": "Learn More"
+        },
+        "page": {
+            "title": "Our Materials",
+            "intro": "Every piece in the Têtu collection is crafted from deadstock fabrics sourced from the world's most prestigious luxury fashion houses.",
+            "upcycled": {
+                "title": "Upcycled Luxury",
+                "description": "We rescue premium materials that would otherwise go to waste. Each fabric tells a story of craftsmanship from renowned ateliers, given new life in our contemporary designs."
+            },
+            "sustainable": {
+                "title": "Sustainable Future",
+                "description": "By utilizing deadstock, we reduce waste and minimize our environmental footprint. Luxury doesn't have to come at the cost of our planet."
+            },
+            "vision": {
+                "title": "The Vision",
+                "description": "Têtu represents a new era of streetwear—one that honors heritage craftsmanship while pushing boundaries. We believe in creating pieces that are both timeless and contemporary, sustainable yet luxurious. Our name, meaning \"stubborn\" in French, reflects our unwavering commitment to quality, sustainability, and innovation."
+            }
+        }
+    },
+    "nft": {
+        "teaser": {
+            "title": "Digital Twin NFT",
+            "description": "Each garment comes with a unique NFT—your certificate of authenticity and gateway to exclusive perks.",
+            "cta": "Discover NFTs"
+        },
+        "page": {
+            "title": "Digital Twin",
+            "intro": "Every Têtu garment comes with a unique NFT—your digital certificate of authenticity and gateway to exclusive experiences.",
+            "howItWorks": "How It Works",
+            "benefits": "Exclusive Benefits"
+        }
+    },
+    "footer": {
+        "rights": "All Rights Reserved"
+    }
+}
