@@ -35,11 +35,12 @@ export const Heading = ({ children, level = 2, style = {}, className = '' }: Hea
 interface TextProps {
     children: React.ReactNode;
     style?: React.CSSProperties;
+    className?: string;
 }
 
-export const Text = ({ children, style = {} }: TextProps) => {
+export const Text = ({ children, style = {}, className = '' }: TextProps) => {
     return (
-        <p style={{
+        <p className={className} style={{
             fontSize: '1.1rem',
             lineHeight: 1.6,
             color: '#888',

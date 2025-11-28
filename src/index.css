@@ -165,6 +165,37 @@
   padding-top: 12rem !important;
 }
 
+.product-title {
+  font-size: 3rem !important;
+  margin-bottom: 1rem !important;
+}
+
+.product-price {
+  font-size: 2rem !important;
+  color: var(--color-accent) !important;
+  margin-bottom: 2rem !important;
+}
+
+.product-image-container {
+  position: sticky !important;
+  top: 12rem !important;
+}
+
+@media (max-width: 768px) {
+  .product-title {
+    font-size: 2rem !important;
+  }
+
+  .product-price {
+    font-size: 1.5rem !important;
+  }
+
+  .product-image-container {
+    position: relative !important;
+    top: 0 !important;
+  }
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
