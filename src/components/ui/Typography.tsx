@@ -5,9 +5,10 @@ interface HeadingProps {
     children: React.ReactNode;
     level?: 1 | 2 | 3 | 4;
     style?: React.CSSProperties;
+    className?: string;
 }
 
-export const Heading = ({ children, level = 2, style = {} }: HeadingProps) => {
+export const Heading = ({ children, level = 2, style = {}, className = '' }: HeadingProps) => {
     const Tag = `h${level}` as ElementType;
 
     const baseStyles: React.CSSProperties = {
@@ -25,7 +26,7 @@ export const Heading = ({ children, level = 2, style = {} }: HeadingProps) => {
     };
 
     return (
-        <Tag style={{ ...baseStyles, ...sizeStyles[level], ...style }}>
+        <Tag className={className} style={{ ...baseStyles, ...sizeStyles[level], ...style }}>
             {children}
         </Tag>
     );

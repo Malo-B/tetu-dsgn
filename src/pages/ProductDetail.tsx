@@ -34,13 +34,8 @@ const ProductDetail = () => {
 
     return (
         <>
-            <Section style={{
-                minHeight: '100vh',
-                display: 'grid',
-                gridTemplateColumns: '1fr 1fr',
-                gap: '4rem',
-                alignItems: 'start',
-                paddingTop: '12rem'
+            <Section className="product-detail-grid" style={{
+                minHeight: '100vh'
             }}>
                 <motion.div
                     initial={{ opacity: 0, x: -50 }}

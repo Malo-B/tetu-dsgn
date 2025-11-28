@@ -33,8 +33,7 @@ const MaterialsSection = () => {
                     </Heading>
                 </Reveal>
                 <Reveal delay={0.2}>
-                    <p style={{
-                        fontSize: '2.5rem',
+                    <p className="materials-text" style={{
                         lineHeight: 1.2,
                         fontWeight: 300
                     }}>
@@ -82,13 +81,11 @@ const MaterialsSection = () => {
                         duration: 20
                     }}
                     style={{
-                        fontSize: '10rem',
                         fontWeight: 900,
                         textTransform: 'uppercase',
-                        display: 'flex',
-                        gap: '4rem',
-                        paddingRight: '4rem'
+                        display: 'flex'
                     }}
+                    className="marquee-text"
                 >
                     <span>Upcycled Luxury</span>
                     <span>•</span>
