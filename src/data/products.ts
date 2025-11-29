@@ -111,8 +111,8 @@ export const products = {
         id: 5,
         name: 'Beige Fleece Hoodie',
         price: '€280',
-        image: '/images/beige_hoodie_model.png',
-        images: ['/images/beige_hoodie_model.png', '/images/beige_hoodie.png'],
+        image: '/images/beige_hoodie_model_2.png',
+        images: ['/images/beige_hoodie_model_2.png', '/images/beige_hoodie.png'],
         description: 'A premium fleece half-zip hoodie in a refined beige colorway with navy blue accents. Crafted from upcycled luxury deadstock fabric, featuring the signature red TÊTU embroidery. This piece combines comfort with conscious design.',
         details: [
             'Premium fleece construction',
