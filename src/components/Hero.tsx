@@ -25,7 +25,7 @@ const Hero = () => {
                         style={{
                             width: '80%',
                             maxWidth: '800px',
-                            filter: 'invert(1)',
+
                             height: 'auto'
                         }}
                     />
