@@ -7,9 +7,9 @@ import { Heading } from './ui/Typography';
 const products = [
     { id: 1, name: 'Coral Fleece Hoodie', price: '€280', img: '/images/red_hoodie.png', slug: 'coral-hoodie' },
     { id: 2, name: 'Slate Fleece Hoodie', price: '€280', img: '/images/blue_hoodie.png', slug: 'slate-hoodie' },
-    { id: 5, name: 'Beige Fleece Hoodie', price: '€280', img: '/images/beige_hoodie_model.png', slug: 'beige-hoodie' },
+    { id: 5, name: 'Beige Fleece Hoodie', price: '€280', img: '/images/beige_hoodie_fashion.png', slug: 'beige-hoodie' },
     { id: 3, name: 'Camel Fleece Hoodie', price: '€280', img: '/images/camel_hoodie_model.png', slug: 'camel-hoodie' },
-    { id: 4, name: 'Charcoal Fleece Hoodie', price: '€280', img: '/images/charcoal_hoodie_model.png', slug: 'charcoal-hoodie' },
+    { id: 4, name: 'Charcoal Fleece Hoodie', price: '€280', img: '/images/charcoal_hoodie_fashion.png', slug: 'charcoal-hoodie' },
 ];
 
 const ProductShowcase = () => {
