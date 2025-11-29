@@ -1,7 +1,6 @@
 
 import { motion } from 'framer-motion';
 import { Section } from './ui/Section';
-import { Heading } from './ui/Typography';
 
 const Hero = () => {
     return (
@@ -19,9 +18,18 @@ const Hero = () => {
                 transition={{ duration: 1, ease: [0.19, 1, 0.22, 1], delay: 0.2 }}
                 style={{ zIndex: 10, mixBlendMode: 'difference', color: 'white' }}
             >
-                <Heading level={1} className="hero-heading" style={{ textAlign: 'center' }}>
-                    TÊTU
-                </Heading>
+                <div className="hero-heading" style={{ textAlign: 'center' }}>
+                    <img
+                        src="/logo_tetu.svg"
+                        alt="TÊTU"
+                        style={{
+                            width: '80%',
+                            maxWidth: '800px',
+                            filter: 'invert(1)',
+                            height: 'auto'
+                        }}
+                    />
+                </div>
             </motion.div>
 
             <motion.p
