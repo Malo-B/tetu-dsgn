@@ -26,6 +26,8 @@ const ProductDetail = () => {
     const productImages = product.images || [product.image];
     const sizes = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
 
+    const [isLightboxOpen, setIsLightboxOpen] = useState(false);
+
     const handleAddToCart = () => {
         addToCart(product, slug!, selectedSize, quantity);
         setAddedToCart(true);
@@ -43,16 +45,21 @@ const ProductDetail = () => {
                     transition={{ duration: 0.8 }}
                     className="product-image-container"
                 >
-                    <img
-                        src={productImages[currentImageIndex]}
-                        alt={product.name}
-                        style={{
-                            width: '100%',
-                            height: 'auto',
-                            borderRadius: '4px',
-                            marginBottom: '1rem'
-                        }}
-                    />
+                    <div
+                        onClick={() => setIsLightboxOpen(true)}
+                        style={{ cursor: 'zoom-in' }}
+                    >
+                        <img
+                            src={productImages[currentImageIndex]}
+                            alt={product.name}
+                            style={{
+                                width: '100%',
+                                height: 'auto',
+                                borderRadius: '4px',
+                                marginBottom: '1rem'
+                            }}
+                        />
+                    </div>
 
                     {/* Image Thumbnails */}
                     {productImages.length > 1 && (
@@ -303,6 +310,63 @@ const ProductDetail = () => {
             </Section>
 
             <Footer />
+
+            {/* Lightbox Modal */}
+            <AnimatePresence>
+                {isLightboxOpen && (
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        onClick={() => setIsLightboxOpen(false)}
+                        style={{
+                            position: 'fixed',
+                            top: 0,
+                            left: 0,
+                            width: '100%',
+                            height: '100%',
+                            background: 'rgba(0, 0, 0, 0.9)',
+                            zIndex: 1000,
+                            display: 'flex',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            padding: '2rem',
+                            cursor: 'zoom-out'
+                        }}
+                    >
+                        <motion.img
+                            initial={{ scale: 0.8, opacity: 0 }}
+                            animate={{ scale: 1, opacity: 1 }}
+                            exit={{ scale: 0.8, opacity: 0 }}
+                            src={productImages[currentImageIndex]}
+                            alt={product.name}
+                            style={{
+                                maxWidth: '100%',
+                                maxHeight: '90vh',
+                                objectFit: 'contain',
+                                borderRadius: '4px'
+                            }}
+                            onClick={(e) => e.stopPropagation()}
+                        />
+                        <button
+                            onClick={() => setIsLightboxOpen(false)}
+                            style={{
+                                position: 'absolute',
+                                top: '2rem',
+                                right: '2rem',
+                                background: 'none',
+                                border: 'none',
+                                color: 'white',
+                                fontSize: '2rem',
+                                cursor: 'pointer',
+                                zIndex: 1001
+                            }}
+                        >
+                            ×
+                        </button>
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </>
     );
 };
