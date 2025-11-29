@@ -15,7 +15,6 @@ export const Section = ({ children, className = "", id = "", style = {} }: Secti
             style={{
                 position: "relative",
                 width: "100%",
-                overflow: "hidden",
                 ...style
             }}
         >
