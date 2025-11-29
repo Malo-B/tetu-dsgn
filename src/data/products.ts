@@ -84,8 +84,8 @@ export const products = {
         id: 4,
         name: 'Charcoal Fleece Hoodie',
         price: '€280',
-        image: '/images/charcoal_hoodie_fashion.png',
-        images: ['/images/charcoal_hoodie_fashion.png', '/images/charcoal_hoodie.png'],
+        image: '/images/charcoal_hoodie_model.png',
+        images: ['/images/charcoal_hoodie_model.png', '/images/charcoal_hoodie.png'],
         description: 'A premium fleece half-zip hoodie in a deep charcoal grey colorway. Crafted from upcycled luxury deadstock fabric, featuring the signature TÊTU embroidery. This piece combines comfort with conscious design.',
         details: [
             'Premium fleece construction',
@@ -111,8 +111,8 @@ export const products = {
         id: 5,
         name: 'Beige Fleece Hoodie',
         price: '€280',
-        image: '/images/beige_hoodie_fashion.png',
-        images: ['/images/beige_hoodie_fashion.png', '/images/beige_hoodie.png'],
+        image: '/images/beige_hoodie_model_2.png',
+        images: ['/images/beige_hoodie_model_2.png', '/images/beige_hoodie.png'],
         description: 'A premium fleece half-zip hoodie in a refined beige colorway with navy blue accents. Crafted from upcycled luxury deadstock fabric, featuring the signature red TÊTU embroidery. This piece combines comfort with conscious design.',
         details: [
             'Premium fleece construction',
