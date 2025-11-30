@@ -25,7 +25,7 @@ const Navbar = () => {
         <img src="/logo_tetu.svg" alt="TÊTU" style={{ height: '2.5rem', filter: 'invert(1)' }} />
       </Link>
       <div className="nav-links" style={{ display: 'flex', fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '0.1em', alignItems: 'center' }}>
-        <Link to="/">{t('nav.shop')}</Link>
+        <Link to="/shop">{t('nav.shop')}</Link>
         <Link to="/materials">{t('nav.materials')}</Link>
         <Link to="/nft">{t('nav.nft')}</Link>
         <Link to="/cart">{t('nav.cart')} ({cartCount})</Link>
