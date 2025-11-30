@@ -1,35 +1,68 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link, useParams, Navigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Section } from '../components/ui/Section';
 import { Reveal } from '../components/ui/Reveal';
 import { Heading, Text } from '../components/ui/Typography';
 import Footer from '../components/Footer';
-import { products, ProductSlug } from '../data/products';
 import { useCart } from '../context/CartContext';
 import { useTranslation } from 'react-i18next';
+import { getProductBySlug, Product } from '../services/productService';
 
 const ProductDetail = () => {
     const { slug } = useParams<{ slug: string }>();
-    const product = slug ? products[slug as ProductSlug] : null;
+    const [product, setProduct] = useState<Product | null>(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(false);
+
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
     const [selectedSize, setSelectedSize] = useState('M');
     const [quantity, setQuantity] = useState(1);
     const [addedToCart, setAddedToCart] = useState(false);
+    const [isLightboxOpen, setIsLightboxOpen] = useState(false);
+
     const { addToCart } = useCart();
     const { t } = useTranslation();
 
-    if (!product) {
+    useEffect(() => {
+        const fetchProduct = async () => {
+            if (!slug) return;
+            try {
+                setLoading(true);
+                const data = await getProductBySlug(slug);
+                setProduct(data);
+            } catch (err) {
+                console.error(err);
+                setError(true);
+            } finally {
+                setLoading(false);
+            }
+        };
+        fetchProduct();
+    }, [slug]);
+
+    if (loading) {
+        return (
+            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+                <Text>Loading...</Text>
+            </div>
+        );
+    }
+
+    if (error || !product) {
         return <Navigate to="/" replace />;
     }
 
-    const productImages = product.images || [product.image];
+    // Handle images - backend returns array of objects { url: string }
+    // Ensure product.images is defined or fallback to array of single image
+    const productImages = product.images && product.images.length > 0
+        ? product.images.map(img => img.url)
+        : [product.image];
     const sizes = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
 
-    const [isLightboxOpen, setIsLightboxOpen] = useState(false);
-
     const handleAddToCart = () => {
-        addToCart(product, slug!, selectedSize, quantity);
+        // Adapt product to CartItem type if needed
+        addToCart(product as any, slug!, selectedSize, quantity);
         setAddedToCart(true);
         setTimeout(() => setAddedToCart(false), 2000);
     };
@@ -94,9 +127,44 @@ const ProductDetail = () => {
                     </Reveal>
 
                     <Reveal delay={0.2}>
-                        <Text className="product-price">
-                            {product.price}
-                        </Text>
+                        <div style={{ marginBottom: '2rem' }}>
+                            {product.discount && product.discount > 0 ? (
+                                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', flexWrap: 'wrap' }}>
+                                    <Text className="product-price" style={{
+                                        textDecoration: 'line-through',
+                                        color: '#666',
+                                        fontSize: '1.5rem'
+                                    }}>
+                                        {product.price}
+                                    </Text>
+                                    <Text className="product-price" style={{
+                                        color: 'var(--color-accent)',
+                                        fontSize: '2rem',
+                                        fontWeight: 700
+                                    }}>
+                                        {(() => {
+                                            const priceNum = parseFloat(product.price.replace(/[^0-9.]/g, ''));
+                                            const discounted = priceNum * (1 - product.discount / 100);
+                                            return `€${Math.round(discounted)}`;
+                                        })()}
+                                    </Text>
+                                    <div style={{
+                                        background: 'var(--color-accent)',
+                                        color: 'var(--color-bg)',
+                                        padding: '0.5rem 1rem',
+                                        borderRadius: '4px',
+                                        fontWeight: 700,
+                                        fontSize: '1rem'
+                                    }}>
+                                        SAVE {product.discount}%
+                                    </div>
+                                </div>
+                            ) : (
+                                <Text className="product-price">
+                                    {product.price}
+                                </Text>
+                            )}
+                        </div>
                     </Reveal>
 
                     <Reveal delay={0.3}>
@@ -107,7 +175,7 @@ const ProductDetail = () => {
 
                     <Reveal delay={0.4}>
                         <div style={{ marginBottom: '2rem' }}>
-                            {product.variants && (
+                            {product.variants && product.variants.length > 0 && (
                                 <div style={{ marginBottom: '2rem' }}>
                                     <Text style={{ marginBottom: '1rem', fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
                                         {t('product.selectColor')}
@@ -260,7 +328,7 @@ const ProductDetail = () => {
                                             background: 'var(--color-accent)',
                                             borderRadius: '50%'
                                         }} />
-                                        <Text style={{ margin: 0 }}>{detail}</Text>
+                                        <Text style={{ margin: 0 }}>{detail.text}</Text>
                                     </li>
                                 ))}
                             </ul>
