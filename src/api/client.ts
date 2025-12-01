@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:3000/api';
+const API_URL = 'https://clothingbrand-server-nxbyxerhc-malobs-projects.vercel.app/api';
 
 export const client = axios.create({
     baseURL: API_URL,
