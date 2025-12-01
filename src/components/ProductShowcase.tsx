@@ -4,7 +4,7 @@ import { Section } from './ui/Section';
 import { Reveal } from './ui/Reveal';
 import { Heading } from './ui/Typography';
 import { useState, useEffect } from 'react';
-import { getProducts, Product } from '../services/productService';
+import { getFeaturedProducts, Product } from '../services/productService';
 
 const ProductShowcase = () => {
     const [products, setProducts] = useState<Product[]>([]);
@@ -12,7 +12,7 @@ const ProductShowcase = () => {
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                const data = await getProducts();
+                const data = await getFeaturedProducts();
                 setProducts(data);
             } catch (err) {
                 console.error(err);

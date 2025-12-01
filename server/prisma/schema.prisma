@@ -18,6 +18,7 @@ model Product {
   images         ProductImage[]
   discount       Int       @default(0)
   category       String?
+  isFeatured     Boolean   @default(false)
   createdAt      DateTime  @default(now())
   updatedAt      DateTime  @updatedAt
   variants       Variant[]

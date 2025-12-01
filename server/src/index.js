@@ -32,6 +32,20 @@ app.get('/api/products', async (req, res) => {
     }
 });
 
+app.get('/api/products/featured', async (req, res) => {
+    try {
+        const products = await prisma.product.findMany({
+            where: { isFeatured: true },
+            take: 5,
+            include: { variants: true, details: true, images: true }
+        });
+        res.json(products);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Failed to fetch featured products' });
+    }
+});
+
 app.get('/api/products/:slug', async (req, res) => {
     try {
         const { slug } = req.params;
@@ -50,11 +64,12 @@ app.get('/api/products/:slug', async (req, res) => {
 app.post('/api/products', async (req, res) => {
     // Basic admin protection would go here
     try {
-        const { name, slug, price, description, image, variants, details, composition, care, sizing, sustainability, images, discount } = req.body;
+        const { name, slug, price, description, image, variants, details, composition, care, sizing, sustainability, images, discount, isFeatured } = req.body;
         const product = await prisma.product.create({
             data: {
                 name, slug, price, description, image, composition, care, sizing, sustainability,
                 discount: discount || 0,
+                isFeatured: isFeatured || false,
                 variants: { create: variants },
                 details: { create: details?.map(d => ({ text: d })) },
                 images: { create: images?.map(url => ({ url })) }
@@ -65,6 +80,23 @@ app.post('/api/products', async (req, res) => {
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Failed to create product' });
+    }
+});
+
+app.put('/api/products/:id', async (req, res) => {
+    // Basic admin protection would go here
+    try {
+        const { id } = req.params;
+        const { isFeatured } = req.body;
+        const product = await prisma.product.update({
+            where: { id },
+            data: { isFeatured },
+            include: { variants: true, details: true, images: true }
+        });
+        res.json(product);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Failed to update product' });
     }
 });
 
