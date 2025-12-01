@@ -16,7 +16,7 @@
                 },
                 {
                     "key": "Access-Control-Allow-Origin",
-                    "value": "*"
+                    "value": "https://tetu-dsgn.vercel.app"
                 },
                 {
                     "key": "Access-Control-Allow-Methods",
@@ -29,10 +29,10 @@
             ]
         }
     ],
-    "routes": [
+    "rewrites": [
         {
-            "src": "/(.*)",
-            "dest": "src/index.js"
+            "source": "/(.*)",
+            "destination": "/src/index.js"
         }
     ]
 }
