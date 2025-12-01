@@ -6,7 +6,12 @@ const prisma = new PrismaClient();
 const app = express();
 const PORT = 3000;
 
-app.use(cors());
+app.use(cors({
+    origin: ['https://tetu-dsgn.vercel.app', 'http://localhost:5173'],
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: true
+}));
 app.use(express.json());
 
 app.get('/api/health', (req, res) => {
