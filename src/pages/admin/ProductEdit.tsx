@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Section } from '../../components/ui/Section';
 import { Heading } from '../../components/ui/Typography';
-import { getProductBySlug } from '../../services/productService';
+import { getProductBySlug, getProducts } from '../../services/productService';
 import { client } from '../../api/client';
 
 interface Variant {
@@ -33,10 +33,17 @@ const ProductEdit = () => {
 
     const [variants, setVariants] = useState<Variant[]>([]);
     const [newVariant, setNewVariant] = useState<Variant>({ name: '', slug: '', color: '#000000' });
+    const [existingCategories, setExistingCategories] = useState<string[]>([]);
 
     const [productId, setProductId] = useState<string>('');
 
     useEffect(() => {
+        // Fetch all products to get existing categories
+        getProducts().then(products => {
+            const categories = Array.from(new Set(products.map(p => p.category).filter(Boolean) as string[]));
+            setExistingCategories(categories);
+        });
+
         if (!isNew && slug) {
             getProductBySlug(slug).then(product => {
                 setProductId(product.id);
@@ -133,7 +140,20 @@ const ProductEdit = () => {
                     <label htmlFor="category" style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.9rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
                         Category
                     </label>
-                    <input id="category" name="category" placeholder="e.g., Hoodies" value={formData.category} onChange={handleChange} style={{ width: '100%', padding: '0.8rem', background: '#222', border: '1px solid #333', color: 'white', borderRadius: '4px' }} />
+                    <input
+                        id="category"
+                        name="category"
+                        list="categories"
+                        placeholder="e.g., Hoodies"
+                        value={formData.category}
+                        onChange={handleChange}
+                        style={{ width: '100%', padding: '0.8rem', background: '#222', border: '1px solid #333', color: 'white', borderRadius: '4px' }}
+                    />
+                    <datalist id="categories">
+                        {existingCategories.map(category => (
+                            <option key={category} value={category} />
+                        ))}
+                    </datalist>
                 </div>
 
                 <div>
