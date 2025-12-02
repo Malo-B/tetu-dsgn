@@ -131,146 +131,146 @@ const Shop = () => {
                 flexDirection: isMobile ? 'column' : 'row'
             }}>
                 {/* Filter Sidebar */}
-                <div style={{
-                    width: showFilters ? (isMobile ? '100%' : '280px') : '0',
-                    minWidth: showFilters ? (isMobile ? '100%' : '280px') : '0',
-                    transition: 'all 0.3s',
-                    overflow: 'hidden'
-                }}>
+                {showFilters && (
                     <div style={{
-                        position: isMobile ? 'relative' : 'sticky',
-                        top: isMobile ? 'auto' : '100px',
-                        background: '#0a0a0a',
-                        padding: isSmallMobile ? '1.5rem' : '2rem',
-                        borderRadius: '8px',
-                        border: '1px solid #222',
-                        marginBottom: isMobile ? '2rem' : '0'
+                        width: isMobile ? '100%' : '280px',
+                        minWidth: isMobile ? '100%' : '280px',
+                        transition: 'all 0.3s'
                     }}>
-                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
-                            <Text style={{ fontSize: '1.2rem', fontWeight: 700, margin: 0 }}>Filters</Text>
-                            {activeFilterCount > 0 && (
-                                <button
-                                    onClick={clearFilters}
-                                    style={{
-                                        background: 'none',
-                                        border: 'none',
-                                        color: 'var(--color-accent)',
-                                        cursor: 'pointer',
-                                        fontSize: '0.9rem',
-                                        textDecoration: 'underline'
-                                    }}
-                                >
-                                    Clear All ({activeFilterCount})
-                                </button>
+                        <div style={{
+                            position: isMobile ? 'relative' : 'sticky',
+                            top: isMobile ? 'auto' : '100px',
+                            background: '#0a0a0a',
+                            padding: isSmallMobile ? '1.5rem' : '2rem',
+                            borderRadius: '8px',
+                            border: '1px solid #222',
+                            marginBottom: isMobile ? '2rem' : '0'
+                        }}>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
+                                <Text style={{ fontSize: '1.2rem', fontWeight: 700, margin: 0 }}>Filters</Text>
+                                {activeFilterCount > 0 && (
+                                    <button
+                                        onClick={clearFilters}
+                                        style={{
+                                            background: 'none',
+                                            border: 'none',
+                                            color: 'var(--color-accent)',
+                                            cursor: 'pointer',
+                                            fontSize: '0.9rem',
+                                            textDecoration: 'underline'
+                                        }}
+                                    >
+                                        Clear All ({activeFilterCount})
+                                    </button>
+                                )}
+                            </div>
+
+                            {/* Category Filter */}
+                            {availableCategories.length > 0 && (
+                                <div style={{ marginBottom: '2rem' }}>
+                                    <Text style={{ fontSize: '0.9rem', fontWeight: 600, marginBottom: '1rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                                        Category
+                                    </Text>
+                                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                                        {availableCategories.map((category) => (
+                                            <label key={category} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }}>
+                                                <input
+                                                    type="checkbox"
+                                                    checked={selectedCategories.includes(category)}
+                                                    onChange={() => toggleCategory(category)}
+                                                    style={{ width: '18px', height: '18px', cursor: 'pointer' }}
+                                                />
+                                                <span>{category}</span>
+                                            </label>
+                                        ))}
+                                    </div>
+                                </div>
                             )}
-                        </div>
 
-                        {/* Category Filter */}
-                        {availableCategories.length > 0 && (
+                            {/* Discount Filter */}
                             <div style={{ marginBottom: '2rem' }}>
                                 <Text style={{ fontSize: '0.9rem', fontWeight: 600, marginBottom: '1rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-                                    Category
+                                    Special Offers
                                 </Text>
-                                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                                    {availableCategories.map((category) => (
-                                        <label key={category} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }}>
-                                            <input
-                                                type="checkbox"
-                                                checked={selectedCategories.includes(category)}
-                                                onChange={() => toggleCategory(category)}
-                                                style={{ width: '18px', height: '18px', cursor: 'pointer' }}
+                                <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }}>
+                                    <input
+                                        type="checkbox"
+                                        checked={showDiscountedOnly}
+                                        onChange={(e) => setShowDiscountedOnly(e.target.checked)}
+                                        style={{ width: '18px', height: '18px', cursor: 'pointer' }}
+                                    />
+                                    <span>On Sale</span>
+                                </label>
+                            </div>
+
+                            {/* Color Filter */}
+                            {availableColors.length > 0 && (
+                                <div style={{ marginBottom: '2rem' }}>
+                                    <Text style={{ fontSize: '0.9rem', fontWeight: 600, marginBottom: '1rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                                        Color
+                                    </Text>
+                                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.8rem' }}>
+                                        {availableColors.map(({ name, color }) => (
+                                            <button
+                                                key={name}
+                                                onClick={() => toggleColor(name)}
+                                                title={name}
+                                                style={{
+                                                    width: '40px',
+                                                    height: '40px',
+                                                    borderRadius: '50%',
+                                                    background: color,
+                                                    border: selectedColors.includes(name) ? '3px solid var(--color-accent)' : '2px solid #333',
+                                                    cursor: 'pointer',
+                                                    transition: 'all 0.3s',
+                                                    boxShadow: selectedColors.includes(name) ? '0 0 0 2px var(--color-bg), 0 0 0 5px var(--color-accent)' : 'none'
+                                                }}
                                             />
-                                            <span>{category}</span>
-                                        </label>
-                                    ))}
+                                        ))}
+                                    </div>
                                 </div>
-                            </div>
-                        )}
+                            )}
 
-                        {/* Discount Filter */}
-                        <div style={{ marginBottom: '2rem' }}>
-                            <Text style={{ fontSize: '0.9rem', fontWeight: 600, marginBottom: '1rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-                                Special Offers
-                            </Text>
-                            <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }}>
-                                <input
-                                    type="checkbox"
-                                    checked={showDiscountedOnly}
-                                    onChange={(e) => setShowDiscountedOnly(e.target.checked)}
-                                    style={{ width: '18px', height: '18px', cursor: 'pointer' }}
-                                />
-                                <span>On Sale</span>
-                            </label>
-                        </div>
-
-                        {/* Color Filter */}
-                        {availableColors.length > 0 && (
+                            {/* Price Range */}
                             <div style={{ marginBottom: '2rem' }}>
                                 <Text style={{ fontSize: '0.9rem', fontWeight: 600, marginBottom: '1rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-                                    Color
+                                    Price Range
                                 </Text>
-                                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.8rem' }}>
-                                    {availableColors.map(({ name, color }) => (
-                                        <button
-                                            key={name}
-                                            onClick={() => toggleColor(name)}
-                                            title={name}
-                                            style={{
-                                                width: '40px',
-                                                height: '40px',
-                                                borderRadius: '50%',
-                                                background: color,
-                                                border: selectedColors.includes(name) ? '3px solid var(--color-accent)' : '2px solid #333',
-                                                cursor: 'pointer',
-                                                transition: 'all 0.3s',
-                                                boxShadow: selectedColors.includes(name) ? '0 0 0 2px var(--color-bg), 0 0 0 5px var(--color-accent)' : 'none'
-                                            }}
-                                        />
-                                    ))}
+                                <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
+                                    <input
+                                        type="number"
+                                        value={priceRange.min}
+                                        onChange={(e) => setPriceRange({ ...priceRange, min: parseInt(e.target.value) || 0 })}
+                                        placeholder="Min"
+                                        style={{
+                                            width: '100%',
+                                            padding: '0.5rem',
+                                            background: '#222',
+                                            border: '1px solid #333',
+                                            color: 'white',
+                                            borderRadius: '4px'
+                                        }}
+                                    />
+                                    <span>-</span>
+                                    <input
+                                        type="number"
+                                        value={priceRange.max}
+                                        onChange={(e) => setPriceRange({ ...priceRange, max: parseInt(e.target.value) || 1000 })}
+                                        placeholder="Max"
+                                        style={{
+                                            width: '100%',
+                                            padding: '0.5rem',
+                                            background: '#222',
+                                            border: '1px solid #333',
+                                            color: 'white',
+                                            borderRadius: '4px'
+                                        }}
+                                    />
                                 </div>
-                            </div>
-                        )}
-
-                        {/* Price Range */}
-                        <div style={{ marginBottom: '2rem' }}>
-                            <Text style={{ fontSize: '0.9rem', fontWeight: 600, marginBottom: '1rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-                                Price Range
-                            </Text>
-                            <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
-                                <input
-                                    type="number"
-                                    value={priceRange.min}
-                                    onChange={(e) => setPriceRange({ ...priceRange, min: parseInt(e.target.value) || 0 })}
-                                    placeholder="Min"
-                                    style={{
-                                        width: '100%',
-                                        padding: '0.5rem',
-                                        background: '#222',
-                                        border: '1px solid #333',
-                                        color: 'white',
-                                        borderRadius: '4px'
-                                    }}
-                                />
-                                <span>-</span>
-                                <input
-                                    type="number"
-                                    value={priceRange.max}
-                                    onChange={(e) => setPriceRange({ ...priceRange, max: parseInt(e.target.value) || 1000 })}
-                                    placeholder="Max"
-                                    style={{
-                                        width: '100%',
-                                        padding: '0.5rem',
-                                        background: '#222',
-                                        border: '1px solid #333',
-                                        color: 'white',
-                                        borderRadius: '4px'
-                                    }}
-                                />
                             </div>
                         </div>
                     </div>
-                </div>
-
+                )}
                 {/* Product Grid */}
                 <div style={{ flex: 1 }}>
                     <div style={{
