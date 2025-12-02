@@ -148,7 +148,12 @@ app.put('/api/products/:id', async (req, res) => {
             data,
             include: { variants: true, details: true, images: true }
         });
-        res.json(product);
+        res.json({
+            ...product,
+            _debug_received_category: category,
+            _debug_data_category: data.category,
+            _debug_req_body_keys: Object.keys(req.body)
+        });
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Failed to update product' });
