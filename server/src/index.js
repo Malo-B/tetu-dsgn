@@ -94,6 +94,8 @@ app.put('/api/products/:id', async (req, res) => {
     // Basic admin protection would go here
     try {
         const { id } = req.params;
+        console.log('PUT /api/products/:id', id);
+        console.log('Request body:', req.body);
         const { name, slug, price, description, image, variants, details, composition, care, sizing, sustainability, images, discount, isFeatured, category } = req.body;
 
         const data = {
