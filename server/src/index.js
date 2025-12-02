@@ -104,6 +104,9 @@ app.put('/api/products/:id', async (req, res) => {
             isFeatured: isFeatured !== undefined ? isFeatured : undefined,
         };
 
+        console.log('Data object before cleanup:', data);
+        console.log('Category in data:', data.category);
+
         // Only update relations if they are provided in the request
         if (variants) {
             data.variants = {
@@ -128,6 +131,9 @@ app.put('/api/products/:id', async (req, res) => {
 
         // Remove undefined keys to avoid Prisma errors (though Prisma usually ignores undefined, it's safer)
         Object.keys(data).forEach(key => data[key] === undefined && delete data[key]);
+
+        console.log('Data object after cleanup:', data);
+        console.log('Final category value:', data.category);
 
         const product = await prisma.product.update({
             where: { id },
