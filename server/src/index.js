@@ -98,6 +98,13 @@ app.put('/api/products/:id', async (req, res) => {
         console.log('Request body:', req.body);
         const { name, slug, price, description, image, variants, details, composition, care, sizing, sustainability, images, discount, isFeatured, category } = req.body;
 
+        console.log('--- DEBUG START ---');
+        console.log('Req Body Keys:', Object.keys(req.body));
+        console.log('Req Body Raw:', JSON.stringify(req.body));
+        console.log('Has Category?', 'category' in req.body);
+        console.log('Category Value:', req.body.category);
+        console.log('--- DEBUG END ---');
+
         const data = {
             name, slug, price, description, image, composition, care, sizing, sustainability, category,
             discount: discount !== undefined ? discount : undefined,
