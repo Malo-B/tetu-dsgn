@@ -90,7 +90,10 @@ const ProductEdit = () => {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        console.log('Submitting form data:', formData);
+        console.log('=== FORM SUBMIT DEBUG ===');
+        console.log('FormData:', formData);
+        console.log('Category value:', formData.category);
+        console.log('Category type:', typeof formData.category);
         try {
             const imageUrls = formData.images.split('\n').map(url => url.trim()).filter(url => url.length > 0);
             const payload = {
@@ -99,6 +102,8 @@ const ProductEdit = () => {
                 variants: variants,
                 details: []
             };
+            console.log('Payload to send:', payload);
+            console.log('Payload category:', payload.category);
 
             if (isNew) {
                 await client.post('/products', payload);
@@ -140,20 +145,28 @@ const ProductEdit = () => {
                     <label htmlFor="category" style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.9rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
                         Category
                     </label>
-                    <input
+                    <select
                         id="category"
                         name="category"
-                        list="categories"
-                        placeholder="e.g., Hoodies"
                         value={formData.category}
                         onChange={handleChange}
                         style={{ width: '100%', padding: '0.8rem', background: '#222', border: '1px solid #333', color: 'white', borderRadius: '4px' }}
-                    />
-                    <datalist id="categories">
+                    >
+                        <option value="">-- Select or type below --</option>
                         {existingCategories.map(category => (
-                            <option key={category} value={category} />
+                            <option key={category} value={category}>{category}</option>
                         ))}
-                    </datalist>
+                    </select>
+                    <div style={{ marginTop: '0.5rem', fontSize: '0.85rem', color: '#999' }}>
+                        Or type a new category:
+                    </div>
+                    <input
+                        type="text"
+                        placeholder="e.g., T-Shirts"
+                        value={!existingCategories.includes(formData.category) ? formData.category : ''}
+                        onChange={(e) => setFormData({ ...formData, category: e.target.value })}
+                        style={{ width: '100%', padding: '0.8rem', background: '#222', border: '1px solid #333', color: 'white', borderRadius: '4px', marginTop: '0.5rem' }}
+                    />
                 </div>
 
                 <div>
