@@ -83,6 +83,7 @@ const ProductEdit = () => {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+        console.log('Submitting form data:', formData);
         try {
             const imageUrls = formData.images.split('\n').map(url => url.trim()).filter(url => url.length > 0);
             const payload = {
