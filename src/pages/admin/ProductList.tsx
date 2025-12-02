@@ -43,6 +43,17 @@ const ProductList = () => {
                         <div style={{ flex: 1 }}>
                             <Text style={{ fontWeight: 'bold' }}>{product.name}</Text>
                             <Text style={{ fontSize: '0.9rem', color: '#888' }}>{product.price}</Text>
+                            {product.category && (
+                                <span style={{
+                                    fontSize: '0.8rem',
+                                    background: '#333',
+                                    padding: '0.2rem 0.5rem',
+                                    borderRadius: '4px',
+                                    marginLeft: '0.5rem'
+                                }}>
+                                    {product.category}
+                                </span>
+                            )}
                         </div>
                         <button
                             onClick={() => toggleFeatured(product)}

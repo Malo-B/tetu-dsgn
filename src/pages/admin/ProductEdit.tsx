@@ -104,6 +104,8 @@ const ProductEdit = () => {
             };
             console.log('Payload to send:', payload);
             console.log('Payload category:', payload.category);
+            console.log('Payload category type:', typeof payload.category);
+            console.log('Payload category length:', payload.category?.length);
 
             if (isNew) {
                 await client.post('/products', payload);

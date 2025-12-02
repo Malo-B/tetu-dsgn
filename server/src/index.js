@@ -106,6 +106,7 @@ app.put('/api/products/:id', async (req, res) => {
 
         console.log('Data object before cleanup:', data);
         console.log('Category in data:', data.category);
+        console.log('Category type in data:', typeof data.category);
 
         // Only update relations if they are provided in the request
         if (variants) {
