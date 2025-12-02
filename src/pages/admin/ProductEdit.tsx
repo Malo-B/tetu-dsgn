@@ -24,6 +24,7 @@ const ProductEdit = () => {
         image: '',
         images: '',
         discount: 0,
+        category: '',
         composition: '',
         care: '',
         sizing: '',
@@ -33,9 +34,12 @@ const ProductEdit = () => {
     const [variants, setVariants] = useState<Variant[]>([]);
     const [newVariant, setNewVariant] = useState<Variant>({ name: '', slug: '', color: '#000000' });
 
+    const [productId, setProductId] = useState<string>('');
+
     useEffect(() => {
         if (!isNew && slug) {
             getProductBySlug(slug).then(product => {
+                setProductId(product.id);
                 setFormData({
                     name: product.name,
                     slug: product.slug,
@@ -44,6 +48,7 @@ const ProductEdit = () => {
                     image: product.image,
                     images: product.images?.map((img: any) => img.url).join('\n') || '',
                     discount: product.discount || 0,
+                    category: product.category || '',
                     composition: product.composition || '',
                     care: product.care || '',
                     sizing: product.sizing || '',
@@ -60,7 +65,7 @@ const ProductEdit = () => {
         }
     }, [slug, isNew]);
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         const value = e.target.name === 'discount' ? parseInt(e.target.value) || 0 : e.target.value;
         setFormData({ ...formData, [e.target.name]: value });
     };
@@ -90,9 +95,13 @@ const ProductEdit = () => {
             if (isNew) {
                 await client.post('/products', payload);
             } else {
-                // await client.put(`/products/${slug}`, payload); // Backend doesn't support PUT yet
-                alert('Update not implemented in backend yet');
-                return;
+                if (productId) {
+                    await client.put(`/products/${productId}`, payload);
+                } else {
+                    console.error('Product ID missing for update');
+                    alert('Error: Product ID missing');
+                    return;
+                }
             }
             navigate('/admin/products');
         } catch (error) {
@@ -117,6 +126,13 @@ const ProductEdit = () => {
                         Slug (URL) *
                     </label>
                     <input id="slug" name="slug" placeholder="e.g., coral-hoodie" value={formData.slug} onChange={handleChange} required style={{ width: '100%', padding: '0.8rem', background: '#222', border: '1px solid #333', color: 'white', borderRadius: '4px' }} />
+                </div>
+
+                <div>
+                    <label htmlFor="category" style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.9rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                        Category
+                    </label>
+                    <input id="category" name="category" placeholder="e.g., Hoodies" value={formData.category} onChange={handleChange} style={{ width: '100%', padding: '0.8rem', background: '#222', border: '1px solid #333', color: 'white', borderRadius: '4px' }} />
                 </div>
 
                 <div>

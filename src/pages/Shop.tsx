@@ -13,6 +13,7 @@ const Shop = () => {
     // Filter states
     const [selectedColors, setSelectedColors] = useState<string[]>([]);
     const [selectedSizes, setSelectedSizes] = useState<string[]>([]);
+    const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
     const [priceRange, setPriceRange] = useState<{ min: number; max: number }>({ min: 0, max: 1000 });
     const [showDiscountedOnly, setShowDiscountedOnly] = useState(false);
     const [showFilters, setShowFilters] = useState(typeof window !== 'undefined' && window.innerWidth > 768);
@@ -45,9 +46,21 @@ const Shop = () => {
         )
     ).filter((v, i, arr) => arr.findIndex(t => t.name === v.name) === i);
 
+    // Extract unique categories
+    const availableCategories = Array.from(
+        new Set(products.map(p => p.category).filter(Boolean) as string[])
+    );
+
     // Apply filters
     useEffect(() => {
         let filtered = [...products];
+
+        // Category filter
+        if (selectedCategories.length > 0) {
+            filtered = filtered.filter(product =>
+                product.category && selectedCategories.includes(product.category)
+            );
+        }
 
         // Color filter
         if (selectedColors.length > 0) {
@@ -69,7 +82,7 @@ const Shop = () => {
         });
 
         setFilteredProducts(filtered);
-    }, [selectedColors, selectedSizes, priceRange, showDiscountedOnly, products]);
+    }, [selectedColors, selectedSizes, selectedCategories, priceRange, showDiscountedOnly, products]);
 
     const toggleColor = (colorName: string) => {
         setSelectedColors(prev =>
@@ -79,14 +92,23 @@ const Shop = () => {
         );
     };
 
+    const toggleCategory = (category: string) => {
+        setSelectedCategories(prev =>
+            prev.includes(category)
+                ? prev.filter(c => c !== category)
+                : [...prev, category]
+        );
+    };
+
     const clearFilters = () => {
         setSelectedColors([]);
         setSelectedSizes([]);
+        setSelectedCategories([]);
         setPriceRange({ min: 0, max: 1000 });
         setShowDiscountedOnly(false);
     };
 
-    const activeFilterCount = selectedColors.length + selectedSizes.length + (showDiscountedOnly ? 1 : 0);
+    const activeFilterCount = selectedColors.length + selectedSizes.length + selectedCategories.length + (showDiscountedOnly ? 1 : 0);
     const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768;
     const isSmallMobile = typeof window !== 'undefined' && window.innerWidth <= 480;
 
@@ -142,6 +164,28 @@ const Shop = () => {
                                 </button>
                             )}
                         </div>
+
+                        {/* Category Filter */}
+                        {availableCategories.length > 0 && (
+                            <div style={{ marginBottom: '2rem' }}>
+                                <Text style={{ fontSize: '0.9rem', fontWeight: 600, marginBottom: '1rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                                    Category
+                                </Text>
+                                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                                    {availableCategories.map((category) => (
+                                        <label key={category} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }}>
+                                            <input
+                                                type="checkbox"
+                                                checked={selectedCategories.includes(category)}
+                                                onChange={() => toggleCategory(category)}
+                                                style={{ width: '18px', height: '18px', cursor: 'pointer' }}
+                                            />
+                                            <span>{category}</span>
+                                        </label>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
 
                         {/* Discount Filter */}
                         <div style={{ marginBottom: '2rem' }}>

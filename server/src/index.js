@@ -22,7 +22,14 @@ app.get('/api/health', (req, res) => {
 
 app.get('/api/products', async (req, res) => {
     try {
+        const { category } = req.query;
+        const where = {};
+        if (category) {
+            where.category = category;
+        }
+
         const products = await prisma.product.findMany({
+            where,
             include: { variants: true, details: true, images: true }
         });
         res.json(products);
@@ -64,10 +71,10 @@ app.get('/api/products/:slug', async (req, res) => {
 app.post('/api/products', async (req, res) => {
     // Basic admin protection would go here
     try {
-        const { name, slug, price, description, image, variants, details, composition, care, sizing, sustainability, images, discount, isFeatured } = req.body;
+        const { name, slug, price, description, image, variants, details, composition, care, sizing, sustainability, images, discount, isFeatured, category } = req.body;
         const product = await prisma.product.create({
             data: {
-                name, slug, price, description, image, composition, care, sizing, sustainability,
+                name, slug, price, description, image, composition, care, sizing, sustainability, category,
                 discount: discount || 0,
                 isFeatured: isFeatured || false,
                 variants: { create: variants },
@@ -87,10 +94,42 @@ app.put('/api/products/:id', async (req, res) => {
     // Basic admin protection would go here
     try {
         const { id } = req.params;
-        const { isFeatured } = req.body;
+        const { name, slug, price, description, image, variants, details, composition, care, sizing, sustainability, images, discount, isFeatured, category } = req.body;
+
+        const data = {
+            name, slug, price, description, image, composition, care, sizing, sustainability, category,
+            discount: discount !== undefined ? discount : undefined,
+            isFeatured: isFeatured !== undefined ? isFeatured : undefined,
+        };
+
+        // Only update relations if they are provided in the request
+        if (variants) {
+            data.variants = {
+                deleteMany: {},
+                create: variants
+            };
+        }
+
+        if (details) {
+            data.details = {
+                deleteMany: {},
+                create: details.map(d => ({ text: d }))
+            };
+        }
+
+        if (images) {
+            data.images = {
+                deleteMany: {},
+                create: images.map(url => ({ url }))
+            };
+        }
+
+        // Remove undefined keys to avoid Prisma errors (though Prisma usually ignores undefined, it's safer)
+        Object.keys(data).forEach(key => data[key] === undefined && delete data[key]);
+
         const product = await prisma.product.update({
             where: { id },
-            data: { isFeatured },
+            data,
             include: { variants: true, details: true, images: true }
         });
         res.json(product);

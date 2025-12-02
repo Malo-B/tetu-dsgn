@@ -7,6 +7,7 @@ export interface Product {
     price: string;
     image: string;
     description: string;
+    category?: string;
     discount?: number;
     isFeatured?: boolean;
     composition?: string;
@@ -30,8 +31,9 @@ export interface Detail {
     text: string;
 }
 
-export const getProducts = async (): Promise<Product[]> => {
-    const response = await client.get('/products');
+export const getProducts = async (category?: string): Promise<Product[]> => {
+    const params = category ? { category } : {};
+    const response = await client.get('/products', { params });
     return response.data;
 };
 
