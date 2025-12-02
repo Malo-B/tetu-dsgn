@@ -145,28 +145,25 @@ const ProductEdit = () => {
                     <label htmlFor="category" style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.9rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
                         Category
                     </label>
-                    <select
+                    <input
                         id="category"
                         name="category"
+                        list="category-suggestions"
+                        placeholder="Type or select: e.g., Hoodies, T-Shirts, Jackets"
                         value={formData.category}
                         onChange={handleChange}
                         style={{ width: '100%', padding: '0.8rem', background: '#222', border: '1px solid #333', color: 'white', borderRadius: '4px' }}
-                    >
-                        <option value="">-- Select or type below --</option>
-                        {existingCategories.map(category => (
-                            <option key={category} value={category}>{category}</option>
-                        ))}
-                    </select>
-                    <div style={{ marginTop: '0.5rem', fontSize: '0.85rem', color: '#999' }}>
-                        Or type a new category:
-                    </div>
-                    <input
-                        type="text"
-                        placeholder="e.g., T-Shirts"
-                        value={!existingCategories.includes(formData.category) ? formData.category : ''}
-                        onChange={(e) => setFormData({ ...formData, category: e.target.value })}
-                        style={{ width: '100%', padding: '0.8rem', background: '#222', border: '1px solid #333', color: 'white', borderRadius: '4px', marginTop: '0.5rem' }}
                     />
+                    <datalist id="category-suggestions">
+                        {existingCategories.map(category => (
+                            <option key={category} value={category} />
+                        ))}
+                    </datalist>
+                    <div style={{ marginTop: '0.3rem', fontSize: '0.75rem', color: '#666' }}>
+                        {existingCategories.length > 0
+                            ? `Existing: ${existingCategories.join(', ')}`
+                            : 'Start typing to create a new category'}
+                    </div>
                 </div>
 
                 <div>
