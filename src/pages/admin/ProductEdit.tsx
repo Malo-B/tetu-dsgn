@@ -11,11 +11,17 @@ interface Variant {
     color: string;
 }
 
+/**
+ * ProductEdit Component
+ * Allows admins to create new products or edit existing ones.
+ * Handles form state, validation, and API submission.
+ */
 const ProductEdit = () => {
     const { slug } = useParams<{ slug: string }>();
     const navigate = useNavigate();
     const isNew = !slug;
 
+    // Form state for product details
     const [formData, setFormData] = useState({
         name: '',
         slug: '',
@@ -31,19 +37,23 @@ const ProductEdit = () => {
         sustainability: ''
     });
 
+    // State for managing product variants (colors, etc.)
     const [variants, setVariants] = useState<Variant[]>([]);
     const [newVariant, setNewVariant] = useState<Variant>({ name: '', slug: '', color: '#000000' });
+
+    // State for category suggestions
     const [existingCategories, setExistingCategories] = useState<string[]>([]);
 
     const [productId, setProductId] = useState<string>('');
 
     useEffect(() => {
-        // Fetch all products to get existing categories
+        // Fetch all products to get existing categories for the suggestion list
         getProducts().then(products => {
             const categories = Array.from(new Set(products.map(p => p.category).filter(Boolean) as string[]));
             setExistingCategories(categories);
         });
 
+        // If editing an existing product, fetch its data and populate the form
         if (!isNew && slug) {
             getProductBySlug(slug).then(product => {
                 setProductId(product.id);
@@ -72,11 +82,19 @@ const ProductEdit = () => {
         }
     }, [slug, isNew]);
 
+    /**
+     * Handle changes in form inputs.
+     * Parses discount as an integer.
+     */
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         const value = e.target.name === 'discount' ? parseInt(e.target.value) || 0 : e.target.value;
         setFormData({ ...formData, [e.target.name]: value });
     };
 
+    /**
+     * Add a new variant to the list.
+     * Validates that all fields are filled.
+     */
     const addVariant = () => {
         if (newVariant.name && newVariant.slug && newVariant.color) {
             setVariants([...variants, newVariant]);
@@ -88,6 +106,10 @@ const ProductEdit = () => {
         setVariants(variants.filter((_, i) => i !== index));
     };
 
+    /**
+     * Handle form submission.
+     * Prepares the payload and sends a POST or PUT request to the API.
+     */
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         console.log('=== FORM SUBMIT DEBUG ===');

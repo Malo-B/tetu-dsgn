@@ -9,6 +9,11 @@ import Footer from '../components/Footer';
 import { CheckoutFormData } from '../types/types';
 import { useTranslation } from 'react-i18next';
 
+/**
+ * Checkout Component
+ * Handles the checkout process.
+ * Collects shipping and payment information and submits the order.
+ */
 const Checkout = () => {
     const { items, getCartTotal, clearCart } = useCart();
     const navigate = useNavigate();
@@ -42,6 +47,10 @@ const Checkout = () => {
         setFormData(prev => ({ ...prev, [name]: value }));
     };
 
+    /**
+     * Handle form submission.
+     * Simulates order placement and clears the cart.
+     */
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         // Here you would typically send the order to your backend

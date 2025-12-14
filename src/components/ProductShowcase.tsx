@@ -6,6 +6,11 @@ import { Heading } from './ui/Typography';
 import { useState, useEffect } from 'react';
 import { getFeaturedProducts, Product } from '../services/productService';
 
+/**
+ * ProductShowcase Component
+ * Displays a grid of featured products on the home page.
+ * Fetches featured products from the API.
+ */
 const ProductShowcase = () => {
     const [products, setProducts] = useState<Product[]>([]);
 

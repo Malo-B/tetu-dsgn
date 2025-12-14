@@ -14,12 +14,22 @@ app.use(cors({
 }));
 app.use(express.json());
 
+/**
+ * Health check endpoint
+ * @route GET /api/health
+ */
 app.get('/api/health', (req, res) => {
     res.json({ status: 'ok' });
 });
 
 // --- Products ---
 
+/**
+ * Get all products
+ * Supports filtering by category via query parameter
+ * @route GET /api/products
+ * @param {string} req.query.category - Optional category to filter by
+ */
 app.get('/api/products', async (req, res) => {
     try {
         const { category } = req.query;
@@ -39,6 +49,11 @@ app.get('/api/products', async (req, res) => {
     }
 });
 
+/**
+ * Get featured products
+ * Returns up to 5 products marked as featured
+ * @route GET /api/products/featured
+ */
 app.get('/api/products/featured', async (req, res) => {
     try {
         const products = await prisma.product.findMany({
@@ -53,6 +68,10 @@ app.get('/api/products/featured', async (req, res) => {
     }
 });
 
+/**
+ * Get a single product by slug
+ * @route GET /api/products/:slug
+ */
 app.get('/api/products/:slug', async (req, res) => {
     try {
         const { slug } = req.params;
@@ -68,6 +87,11 @@ app.get('/api/products/:slug', async (req, res) => {
     }
 });
 
+/**
+ * Create a new product
+ * @route POST /api/products
+ * @access Private (TODO: Add authentication)
+ */
 app.post('/api/products', async (req, res) => {
     // Basic admin protection would go here
     try {
@@ -90,6 +114,11 @@ app.post('/api/products', async (req, res) => {
     }
 });
 
+/**
+ * Update an existing product
+ * @route PUT /api/products/:id
+ * @access Private (TODO: Add authentication)
+ */
 app.put('/api/products/:id', async (req, res) => {
     // Basic admin protection would go here
     try {
@@ -162,6 +191,10 @@ app.put('/api/products/:id', async (req, res) => {
 
 // --- Orders ---
 
+/**
+ * Create a new order
+ * @route POST /api/orders
+ */
 app.post('/api/orders', async (req, res) => {
     try {
         const { customerName, customerEmail, items, total } = req.body;
@@ -188,6 +221,11 @@ app.post('/api/orders', async (req, res) => {
     }
 });
 
+/**
+ * Get all orders
+ * @route GET /api/orders
+ * @access Private (TODO: Add authentication)
+ */
 app.get('/api/orders', async (req, res) => {
     try {
         const orders = await prisma.order.findMany({
@@ -203,6 +241,10 @@ app.get('/api/orders', async (req, res) => {
 
 // --- Admin ---
 // TODO: Add real authentication
+/**
+ * Admin login endpoint
+ * @route POST /api/admin/login
+ */
 app.post('/api/admin/login', async (req, res) => {
     const { username, password } = req.body;
     // Mock login

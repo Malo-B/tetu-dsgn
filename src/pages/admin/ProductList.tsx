@@ -4,6 +4,11 @@ import { Heading, Text } from '../../components/ui/Typography';
 import { getProducts, Product, updateProductFeatured } from '../../services/productService';
 import { Link } from 'react-router-dom';
 
+/**
+ * ProductList Component
+ * Displays a list of all products in the admin panel.
+ * Allows toggling the 'featured' status of products.
+ */
 const ProductList = () => {
     const [products, setProducts] = useState<Product[]>([]);
 
@@ -11,6 +16,10 @@ const ProductList = () => {
         getProducts().then(setProducts);
     }, []);
 
+    /**
+     * Toggle the featured status of a product.
+     * Limits the number of featured products to 5.
+     */
     const toggleFeatured = async (product: Product) => {
         try {
             const updated = await updateProductFeatured(product.id, !product.isFeatured);

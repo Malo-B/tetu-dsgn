@@ -7,6 +7,11 @@ import { Heading, Text } from '../components/ui/Typography';
 import Footer from '../components/Footer';
 import { useTranslation } from 'react-i18next';
 
+/**
+ * Cart Component
+ * Displays the user's shopping cart.
+ * Handles quantity updates, item removal, and total calculation.
+ */
 const Cart = () => {
     const { items, removeFromCart, updateQuantity, getCartTotal } = useCart();
     const { t } = useTranslation();

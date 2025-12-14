@@ -5,6 +5,11 @@ import { Section } from '../components/ui/Section';
 import { Heading, Text } from '../components/ui/Typography';
 import { getProducts, Product } from '../services/productService';
 
+/**
+ * Shop Component
+ * Displays a grid of products with filtering options.
+ * Supports filtering by category, color, price, and discount.
+ */
 const Shop = () => {
     const [products, setProducts] = useState<Product[]>([]);
     const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
@@ -52,6 +57,7 @@ const Shop = () => {
     );
 
     // Apply filters
+    // Apply filters whenever filter state or products change
     useEffect(() => {
         let filtered = [...products];
 

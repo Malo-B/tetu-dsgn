@@ -3,11 +3,20 @@ import { useNavigate } from 'react-router-dom';
 import { Section } from '../../components/ui/Section';
 import { Heading } from '../../components/ui/Typography';
 
+/**
+ * Login Component
+ * Admin login page.
+ * Currently uses a mock login implementation.
+ */
 const Login = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
 
+    /**
+     * Handle login form submission.
+     * Checks credentials against hardcoded values (mock implementation).
+     */
     const handleLogin = (e: React.FormEvent) => {
         e.preventDefault();
         // Mock login

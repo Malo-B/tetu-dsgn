@@ -2,6 +2,10 @@ import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
+/**
+ * Product data to be seeded into the database.
+ * Each product object contains details, variants, and images.
+ */
 const products = [
     {
         slug: 'coral-hoodie',
@@ -141,6 +145,11 @@ const products = [
     }
 ];
 
+/**
+ * Main seeding function.
+ * Iterates through the products array and upserts each product into the database.
+ * Also creates related records for details, variants, and images.
+ */
 async function main() {
     console.log('Start seeding ...');
     for (const p of products) {

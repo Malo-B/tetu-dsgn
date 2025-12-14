@@ -6,6 +6,11 @@ import { Section } from '../components/ui/Section';
 import { Reveal } from '../components/ui/Reveal';
 import { Heading, Text } from '../components/ui/Typography';
 
+/**
+ * Home Component
+ * Landing page of the application.
+ * Features the Hero section, Product Showcase, and teasers for other sections.
+ */
 const Home = () => {
     return (
         <>

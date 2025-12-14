@@ -1,6 +1,11 @@
 import { Section } from '../../components/ui/Section';
 import { Heading, Text } from '../../components/ui/Typography';
 
+/**
+ * Dashboard Component
+ * Admin dashboard showing key metrics.
+ * Currently displays placeholder data.
+ */
 const Dashboard = () => {
     return (
         <Section>

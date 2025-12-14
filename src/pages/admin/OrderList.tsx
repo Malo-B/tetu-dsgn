@@ -11,10 +11,15 @@ interface Order {
     createdAt: string;
 }
 
+/**
+ * OrderList Component
+ * Displays a list of all orders in the admin panel.
+ */
 const OrderList = () => {
     const [orders, setOrders] = useState<Order[]>([]);
 
     useEffect(() => {
+        // Fetch orders from the API
         client.get('/orders').then(res => setOrders(res.data));
     }, []);
 

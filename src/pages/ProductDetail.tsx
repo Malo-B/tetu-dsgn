@@ -9,6 +9,11 @@ import { useCart } from '../context/CartContext';
 import { useTranslation } from 'react-i18next';
 import { getProductBySlug, Product } from '../services/productService';
 
+/**
+ * ProductDetail Component
+ * Displays detailed information about a single product.
+ * Handles image gallery, size selection, quantity, and adding to cart.
+ */
 const ProductDetail = () => {
     const { slug } = useParams<{ slug: string }>();
     const [product, setProduct] = useState<Product | null>(null);
@@ -60,6 +65,10 @@ const ProductDetail = () => {
         : [product.image];
     const sizes = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
 
+    /**
+     * Handle adding the product to the cart.
+     * Shows a temporary success message.
+     */
     const handleAddToCart = () => {
         // Adapt product to CartItem type if needed
         addToCart(product as any, slug!, selectedSize, quantity);
