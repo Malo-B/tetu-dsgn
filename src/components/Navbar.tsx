@@ -4,6 +4,11 @@ import { useTranslation } from 'react-i18next';
 import LanguageSwitcher from './LanguageSwitcher';
 import { useCart } from '../context/CartContext';
 
+/**
+ * Navbar Component
+ * Main navigation bar for the application.
+ * Includes links to pages, cart count, and language switcher.
+ */
 const Navbar = () => {
   const { t } = useTranslation();
   const { getCartCount } = useCart();
@@ -22,7 +27,7 @@ const Navbar = () => {
       className="navbar"
     >
       <Link to="/" style={{ display: 'flex', alignItems: 'center' }}>
-        <img src="/logo_tetu.svg" alt="TÊTU" style={{ height: '2.5rem', filter: 'invert(1)' }} />
+        <img src="/logo_tetu.svg" alt="TÊTU" style={{ height: '2.5rem' }} />
       </Link>
       <div className="nav-links" style={{ display: 'flex', fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '0.1em', alignItems: 'center' }}>
         <Link to="/shop">{t('nav.shop')}</Link>
