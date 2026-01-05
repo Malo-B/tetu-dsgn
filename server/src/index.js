@@ -6,9 +6,10 @@ const prisma = new PrismaClient();
 const app = express();
 const PORT = 3000;
 
+
 app.use(cors({
     origin: ['https://tetu-dsgn.vercel.app', 'http://localhost:5173', 'http://localhost:3000'],
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],
     credentials: true
 }));
@@ -32,10 +33,15 @@ app.get('/api/health', (req, res) => {
  */
 app.get('/api/products', async (req, res) => {
     try {
-        const { category } = req.query;
+        const { category, includeHidden } = req.query;
         const where = {};
         if (category) {
             where.category = category;
+        }
+        // Only show visible products to public users
+        // Admin can pass includeHidden=true to see all products
+        if (includeHidden !== 'true') {
+            where.isHidden = false;
         }
 
         const products = await prisma.product.findMany({
@@ -51,13 +57,16 @@ app.get('/api/products', async (req, res) => {
 
 /**
  * Get featured products
- * Returns up to 5 products marked as featured
+ * Returns up to 5 products marked as featured and not hidden
  * @route GET /api/products/featured
  */
 app.get('/api/products/featured', async (req, res) => {
     try {
         const products = await prisma.product.findMany({
-            where: { isFeatured: true },
+            where: {
+                isFeatured: true,
+                isHidden: false
+            },
             take: 5,
             include: { variants: true, details: true, images: true }
         });
@@ -188,6 +197,120 @@ app.put('/api/products/:id', async (req, res) => {
         res.status(500).json({ error: 'Failed to update product' });
     }
 });
+
+/**
+ * Update product visibility (hide/show)
+ * @route PATCH /api/products/:id/visibility
+ * @access Private (TODO: Add authentication)
+ */
+app.patch('/api/products/:id/visibility', async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { isHidden } = req.body;
+
+        // If hiding a product, automatically unfeature it
+        const updateData = { isHidden };
+        if (isHidden === true) {
+            updateData.isFeatured = false;
+        }
+
+        const product = await prisma.product.update({
+            where: { id },
+            data: updateData,
+            include: { variants: true, details: true, images: true }
+        });
+        res.json(product);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Failed to update product visibility' });
+    }
+});
+
+/**
+ * Delete a product
+ * @route DELETE /api/products/:id
+ * @access Private (TODO: Add authentication)
+ */
+app.delete('/api/products/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        // First, set productId to null in any OrderItems that reference this product
+        // This prevents foreign key constraint errors
+        await prisma.orderItem.updateMany({
+            where: { productId: id },
+            data: { productId: null }
+        });
+
+        // Now delete the product (cascade will handle variants, details, images)
+        await prisma.product.delete({
+            where: { id }
+        });
+
+        res.json({ success: true, message: 'Product deleted successfully' });
+    } catch (error) {
+        console.error('Delete product error:', error);
+        res.status(500).json({ error: 'Failed to delete product' });
+    }
+});
+
+/**
+ * Bulk operations on products
+ * @route POST /api/products/bulk-actions
+ * @access Private (TODO: Add authentication)
+ * @body {string[]} ids - Array of product IDs
+ * @body {string} action - Action to perform: 'hide', 'show', or 'delete'
+ */
+app.post('/api/products/bulk-actions', async (req, res) => {
+    try {
+        const { ids, action } = req.body;
+
+        if (!ids || !Array.isArray(ids) || ids.length === 0) {
+            return res.status(400).json({ error: 'Invalid product IDs' });
+        }
+
+        if (!['hide', 'show', 'delete'].includes(action)) {
+            return res.status(400).json({ error: 'Invalid action. Must be hide, show, or delete' });
+        }
+
+        let result;
+        switch (action) {
+            case 'hide':
+                result = await prisma.product.updateMany({
+                    where: { id: { in: ids } },
+                    data: { isHidden: true, isFeatured: false }
+                });
+                break;
+            case 'show':
+                result = await prisma.product.updateMany({
+                    where: { id: { in: ids } },
+                    data: { isHidden: false }
+                });
+                break;
+            case 'delete':
+                // First, set productId to null in any OrderItems that reference these products
+                await prisma.orderItem.updateMany({
+                    where: { productId: { in: ids } },
+                    data: { productId: null }
+                });
+                // Now delete the products
+                result = await prisma.product.deleteMany({
+                    where: { id: { in: ids } }
+                });
+                break;
+        }
+
+        res.json({
+            success: true,
+            message: `Successfully ${action === 'delete' ? 'deleted' : action === 'hide' ? 'hidden' : 'shown'} ${result.count} product(s)`,
+            count: result.count
+        });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Failed to perform bulk action' });
+    }
+});
+
 
 // --- Orders ---
 

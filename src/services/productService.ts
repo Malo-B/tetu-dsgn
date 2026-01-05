@@ -10,6 +10,7 @@ export interface Product {
     category?: string;
     discount?: number;
     isFeatured?: boolean;
+    isHidden?: boolean;
     composition?: string;
     care?: string;
     sizing?: string;
@@ -31,8 +32,10 @@ export interface Detail {
     text: string;
 }
 
-export const getProducts = async (category?: string): Promise<Product[]> => {
-    const params = category ? { category } : {};
+export const getProducts = async (category?: string, includeHidden = false): Promise<Product[]> => {
+    const params: any = {};
+    if (category) params.category = category;
+    if (includeHidden) params.includeHidden = 'true';
     const response = await client.get('/products', { params });
     return response.data;
 };
@@ -50,4 +53,17 @@ export const getProductBySlug = async (slug: string): Promise<Product> => {
 export const updateProductFeatured = async (id: string, isFeatured: boolean): Promise<Product> => {
     const response = await client.put(`/products/${id}`, { isFeatured });
     return response.data;
+};
+
+export const updateProductVisibility = async (id: string, isHidden: boolean): Promise<Product> => {
+    const response = await client.patch(`/products/${id}/visibility`, { isHidden });
+    return response.data;
+};
+
+export const deleteProduct = async (id: string): Promise<void> => {
+    await client.delete(`/products/${id}`);
+};
+
+export const bulkUpdateProducts = async (ids: string[], action: 'hide' | 'show' | 'delete'): Promise<void> => {
+    await client.post('/products/bulk-actions', { ids, action });
 };

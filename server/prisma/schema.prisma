@@ -19,6 +19,7 @@ model Product {
   discount       Int       @default(0)
   category       String?
   isFeatured     Boolean   @default(false)
+  isHidden       Boolean   @default(false)
   createdAt      DateTime  @default(now())
   updatedAt      DateTime  @updatedAt
   variants       Variant[]
