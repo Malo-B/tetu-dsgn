@@ -7,14 +7,19 @@
         "cart": "Panier"
     },
     "hero": {
-        "subtitle": "Têtu par nature"
+        "subtitle": "Élégance Intemporelle"
     },
     "products": {
-        "title": "Dernières Sorties",
-        "coralHoodie": "Sweat Polaire Corail",
-        "slateHoodie": "Sweat Polaire Ardoise",
-        "camelHoodie": "Sweat Polaire Camel",
-        "charcoalHoodie": "Sweat Polaire Anthracite"
+        "title": "Collection Signature",
+        "lightBlueCardigan": "Cardigan Bleu Ciel",
+        "navyCardigan": "Cardigan Marine",
+        "redCardigan": "Cardigan Bordeaux",
+        "lightBluePolo": "Polo Bleu Ciel",
+        "navyPolo": "Polo Marine",
+        "redPolo": "Polo Bordeaux",
+        "lightBluePull": "Pull Bleu Ciel",
+        "navyPull": "Pull Marine",
+        "redPull": "Pull Bordeaux"
     },
     "product": {
         "selectColor": "Sélectionner la Couleur",
@@ -61,24 +66,24 @@
     },
     "materials": {
         "teaser": {
-            "title": "Matériaux de Luxe Recyclés",
-            "description": "Chaque pièce est confectionnée à partir de tissus invendus provenant des maisons de mode de luxe les plus prestigieuses au monde.",
+            "title": "Matériaux Premium d'Exception",
+            "description": "Chaque pièce est confectionnée à partir de matériaux nobles sélectionnés pour leur qualité exceptionnelle et leur provenance prestigieuse.",
             "cta": "En Savoir Plus"
         },
         "page": {
             "title": "Nos Matériaux",
-            "intro": "Chaque pièce de la collection Têtu est confectionnée à partir de tissus invendus provenant des maisons de mode de luxe les plus prestigieuses au monde.",
+            "intro": "Chaque création Têtu est confectionnée à partir de matières premières d'exception, sélectionnées pour leur qualité supérieure et leur origine prestigieuse.",
             "upcycled": {
-                "title": "Luxe Recyclé",
-                "description": "Nous sauvons des matériaux premium qui seraient autrement gaspillés. Chaque tissu raconte une histoire de savoir-faire d'ateliers renommés, donnant une nouvelle vie à nos créations contemporaines."
+                "title": "Excellence Artisanale",
+                "description": "Nous sélectionnons les plus belles matières—laine mérinos italienne, coton égyptien peigné—pour créer des pièces d'une qualité irréprochable. Chaque fibre témoigne d'un savoir-faire ancestral et d'une attention méticuleuse aux détails."
             },
             "sustainable": {
-                "title": "Avenir Durable",
-                "description": "En utilisant des stocks morts, nous réduisons les déchets et minimisons notre empreinte environnementale. Le luxe ne doit pas se faire au détriment de notre planète."
+                "title": "Durabilité Raffinée",
+                "description": "En privilégiant les tissus invendus de maisons prestigieuses, nous offrons une seconde vie aux matériaux d'exception tout en réduisant notre empreinte environnementale. Le luxe et la responsabilité ne sont pas incompatibles."
             },
             "vision": {
                 "title": "La Vision",
-                "description": "Têtu représente une nouvelle ère du streetwear—une ère qui honore l'artisanat patrimonial tout en repoussant les limites. Nous croyons en la création de pièces à la fois intemporelles et contemporaines, durables et luxueuses. Notre nom reflète notre engagement inébranlable envers la qualité, la durabilité et l'innovation."
+                "description": "Têtu incarne une nouvelle ère du vêtement formel—une ère qui honore l'artisanat traditionnel tout en embrassant la modernité. Nous croyons en la création de pièces intemporelles, raffinées et durables. Notre nom reflète notre engagement inébranlable envers l'excellence, la qualité et l'élégance."
             }
         }
     },

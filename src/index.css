@@ -1,14 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700;900&display=swap');
 
 :root {
-  --color-bg: #050505;
-  --color-text: #f0f0f0;
-  --color-accent: #4A90E2;
-  /* Electric Blue */
-  --color-accent-hover: #6BA8F0;
-  /* Lighter Blue */
-  --color-secondary: #1a1a1a;
-  --color-chrome: #e0e0e0;
+  --color-bg: #0f0e0d;
+  --color-text: #f5f4f0;
+  --color-accent: #8B4049;
+  /* Burgundy Wine */
+  --color-accent-hover: #a85460;
+  /* Lighter Burgundy */
+  --color-secondary: #1c1917;
+  --color-chrome: #d4c5a9;
 
   --font-main: 'Outfit', sans-serif;
 
@@ -19,16 +19,19 @@
   --spacing-container: 2rem;
 
   /* Responsive Typography */
-  --font-size-h1: 12rem;
-  --font-size-h2: 4rem;
-  --font-size-h3: 2rem;
+  --font-size-h1: 8rem;
+  --font-size-h2: 3.5rem;
+  --font-size-h3: 1.8rem;
+  --letter-spacing-tight: -0.02em;
+  --letter-spacing-normal: 0.02em;
+  --letter-spacing-wide: 0.1em;
 }
 
 @media (max-width: 768px) {
   :root {
     --spacing-section: 2rem;
     --spacing-container: 1rem;
-    --font-size-h1: 6rem;
+    --font-size-h1: 4.5rem;
     --font-size-h2: 2.5rem;
     --font-size-h3: 1.5rem;
   }
@@ -73,8 +76,9 @@
 }
 
 .hero-heading {
-  font-size: 12rem !important;
-  line-height: 0.8 !important;
+  font-size: 8rem !important;
+  line-height: 0.85 !important;
+  letter-spacing: var(--letter-spacing-tight) !important;
 }
 
 .product-grid {
@@ -163,7 +167,7 @@
   }
 
   .hero-heading {
-    font-size: 5rem !important;
+    font-size: 4.5rem !important;
   }
 
   .product-grid {

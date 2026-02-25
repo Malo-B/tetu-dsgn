@@ -57,7 +57,7 @@ const Hero = () => {
                     padding: '0 1rem'
                 }}
             >
-                Stubborn by design
+                Timeless Elegance
             </motion.p>
         </Section>
     );

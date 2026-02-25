@@ -21,12 +21,12 @@ const Home = () => {
             <Section style={{ background: '#0a0a0a', textAlign: 'center' }}>
                 <Reveal>
                     <Heading level={2} style={{ marginBottom: '2rem' }}>
-                        Upcycled Luxury Materials
+                        Premium Materials of Distinction
                     </Heading>
                 </Reveal>
                 <Reveal delay={0.2}>
                     <Text style={{ maxWidth: '600px', margin: '0 auto 3rem' }}>
-                        Every piece is crafted from deadstock fabrics sourced from the world's most prestigious luxury fashion houses.
+                        Every piece is crafted from exceptional materials selected for their superior quality and prestigious provenance.
                     </Text>
                 </Reveal>
                 <Reveal delay={0.3}>
@@ -49,12 +49,12 @@ const Home = () => {
             <Section style={{ textAlign: 'center' }}>
                 <Reveal>
                     <Heading level={2} style={{ marginBottom: '2rem' }}>
-                        Digital Twin NFT
+                        Certificate of Authenticity
                     </Heading>
                 </Reveal>
                 <Reveal delay={0.2}>
                     <Text style={{ maxWidth: '600px', margin: '0 auto 3rem' }}>
-                        Each garment comes with a unique NFT—your certificate of authenticity and gateway to exclusive perks.
+                        Each garment comes with a unique digital certificate—your proof of authenticity and gateway to exclusive privileges.
                     </Text>
                 </Reveal>
                 <Reveal delay={0.3}>
